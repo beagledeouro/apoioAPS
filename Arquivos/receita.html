@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emissor de Receitas - ESF CDI 2</title>
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/receita.css">
+</head>
+<body>
+
+    <!-- HEADER DA APLICAÇÃO -->
+    <header class="app-header">
+        <div class="app-header-inner">
+            <h1>ESF CDI 2 — Receituário</h1>
+            <a class="home-link" href="../index.html">← Início</a>
+        </div>
+    </header>
+
+    <!-- INTERFACE DA APLICAÇÃO (TELA) -->
+    <div class="app-container">
+        
+        <!-- COLUNA ESQUERDA: CONFIGURAÇÕES E PACIENTE -->
+        <div class="left-col">
+            <!-- Tipo de Receita -->
+            <div class="card">
+                <h2>Tipo de Documento</h2>
+                <div class="form-group">
+                    <label for="tipo-receita">Tipo de Receituário</label>
+                    <select id="tipo-receita">
+                        <option value="simples">Receituário Comum (2 Vias)</option>
+                        <option value="especial">Receituário de Controle Especial (Portaria 344/98)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dados do Profissional / Unidade -->
+            <div class="card">
+                <h2>Identificação da Unidade e Profissional</h2>
+                <div class="form-group">
+                    <label for="cfg-unidade">Unidade de Saúde</label>
+                    <input type="text" id="cfg-unidade" value="ESF CDI 2" readonly>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="cfg-cnes">CNES</label>
+                        <input type="text" id="cfg-cnes" value="7633432" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="cfg-endereco-unidade">Endereço da Unidade</label>
+                        <input type="text" id="cfg-endereco-unidade" value="Rua Nativo de Senna 33, CDI 2, MG" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cfg-medico">Nome do Profissional Prescritor</label>
+                    <input type="text" id="cfg-medico" placeholder="Ex: Dr. Leonardo Silva ou Enf. Joana Santos">
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="cfg-esp">Especialidade / Cargo</label>
+                        <input type="text" id="cfg-esp" placeholder="Ex: Médico de Família ou Enfermeiro(a)">
+                    </div>
+                    <div class="form-group">
+                        <label for="cfg-crm">Conselho / Registro / UF</label>
+                        <input type="text" id="cfg-crm" placeholder="Ex: CRM-MG 123456 ou COREN-MG 654321">
+                    </div>
+                </div>
+                <button type="button" class="save-config" data-action="salvar-configuracoes">💾 Salvar Dados Locais</button>
+            </div>
+
+            <!-- Dados do Paciente -->
+            <div class="card">
+                <h2>Dados do Paciente</h2>
+                <div class="form-group">
+                    <label for="pac-nome">Nome Completo</label>
+                    <input type="text" id="pac-nome" placeholder="Nome completo do paciente" required>
+                </div>
+                <div class="row">
+                    <div class="form-group" style="flex: 1 1 120px;">
+                        <label for="pac-doc-tipo">Documento</label>
+                        <select id="pac-doc-tipo">
+                            <option value="CPF">CPF</option>
+                            <option value="Passaporte">Passaporte</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 2 1 190px;">
+                        <label for="pac-doc-num" id="pac-doc-label">Número do CPF</label>
+                        <input type="text" id="pac-doc-num" placeholder="Ex: 000.000.000-00">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="pac-idade">Idade / Data Nasc.</label>
+                        <input type="text" id="pac-idade" placeholder="Ex: 35 anos ou 10/05/1988">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pac-end">Endereço (obrigatório p/ Controle Especial)</label>
+                    <input type="text" id="pac-end" placeholder="Rua, Número, Bairro, Cidade">
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA: PRESCRIÇÃO E MODELOS -->
+        <div class="right-col">
+            
+            <!-- Gestão de Modelos -->
+            <div class="card model-card">
+                <h2>Modelos / Protocolos de Prescrição</h2>
+                <div class="row model-row">
+                    <select id="select-template">
+                        <option value="">-- Selecione um modelo salvo --</option>
+                    </select>
+                    <button data-action="carregar-modelo">Carregar</button>
+                    <button class="danger" data-action="excluir-modelo">Excluir</button>
+                </div>
+            </div>
+
+            <!-- Adição de Medicamentos -->
+            <div class="card">
+                <h2>Adicionar Medicamento (Prescrição Farmacológica)</h2>
+                
+                <!-- 1. Nome do Medicamento -->
+                <div class="form-group autocomplete-wrapper">
+                    <label for="med-nome">1. Nome do Medicamento</label>
+                    <input type="text" id="med-nome" placeholder="Ex: Amoxicilina, Dipirona Sódica, Losartana Potássica" autocomplete="off">
+                    <ul class="autocomplete-list" id="autocomplete-list"></ul>
+                    <small class="field-hint"><strong>Exemplos:</strong> Amoxicilina, Dipirona Sódica, Losartana Potássica, Ibuprofeno, Metformina, Omeprazol, Azitromicina</small>
+                </div>
+
+                <div class="row">
+                    <!-- 2. Concentração -->
+                    <div class="form-group">
+                        <label for="med-concentracao">2. Concentração</label>
+                        <input type="text" id="med-concentracao" placeholder="Ex: 500 mg, 250 mg/5 mL, 50 mg">
+                        <small class="field-hint"><strong>Exemplos:</strong> 500 mg, 25 mg, 50 mg/mL, 250 mg/5 mL, 1 g, 40 UI/mL, 0,5%</small>
+                    </div>
+
+                    <!-- 3. Forma Farmacêutica -->
+                    <div class="form-group">
+                        <label for="med-forma">3. Forma Farmacêutica</label>
+                        <input type="text" id="med-forma" list="lista-formas" placeholder="Ex: Comprimido, Cápsula, Suspensão Oral">
+                        <datalist id="lista-formas">
+                            <option value="Comprimido">
+                            <option value="Comprimido Revestido">
+                            <option value="Cápsula">
+                            <option value="Suspensão Oral">
+                            <option value="Solução Gotas">
+                            <option value="Xarope">
+                            <option value="Pomada">
+                            <option value="Creme">
+                            <option value="Gel">
+                            <option value="Solução Injetável">
+                            <option value="Solução Nasal">
+                            <option value="Colírio">
+                            <option value="Aerossol / Spray">
+                        </datalist>
+                        <small class="field-hint"><strong>Exemplos:</strong> Comprimido, Cápsula, Suspensão Oral, Xarope, Pomada, Solução Gotas</small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- 4. Quantidade -->
+                    <div class="form-group" style="flex: 1 1 200px;">
+                        <label for="med-quantidade">4. Quantidade a Dispensar</label>
+                        <input type="text" id="med-quantidade" placeholder="Ex: 1 caixa, 21 comprimidos, 2 frascos">
+                        <small class="field-hint"><strong>Exemplos:</strong> 20 comprimidos, 1 caixa, 2 frascos de 60 mL, 1 bisnaga de 30 g</small>
+                    </div>
+
+                    <!-- 6. Modo de Uso -->
+                    <div class="form-group" style="flex: 1 1 200px;">
+                        <label for="med-modo">5. Modo de Uso (Via / Duração)</label>
+                        <input type="text" id="med-modo" list="lista-modos" placeholder="Ex: Uso oral por 7 dias, Uso contínuo">
+                        <datalist id="lista-modos">
+                            <option value="Uso oral contínuo">
+                            <option value="Uso oral por 5 dias">
+                            <option value="Uso oral por 7 dias">
+                            <option value="Uso oral por 10 dias">
+                            <option value="Uso oral se necessário">
+                            <option value="Uso tópico por 7 dias">
+                            <option value="Uso tópico aplicando 2x ao dia">
+                            <option value="Uso oftálmico por 7 dias">
+                            <option value="Uso nasal">
+                            <option value="Uso inalatório">
+                            <option value="Uso sublingual">
+                        </datalist>
+                        <small class="field-hint"><strong>Exemplos:</strong> Uso oral por 7 dias; Uso contínuo; Uso tópico aplicando 2x ao dia; Uso inalatório</small>
+                    </div>
+                </div>
+
+                <!-- 5. Posologia -->
+                <div class="form-group">
+                    <label for="med-posologia">6. Posologia (Instruções de Administração)</label>
+                    <input type="text" id="med-posologia" placeholder="Ex: Tomar 1 comprimido de 8 em 8 horas se dor ou febre">
+                    <small class="field-hint"><strong>Exemplos:</strong> Tomar 1 comprimido de 8 em 8 horas; Ingerir 30 gotas de 6 em 6h; Tomar 1 comprimido pela manhã em jejum; Aplicar 1 gota em cada olho 3x ao dia</small>
+                </div>
+
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 15px;">
+                    <button type="button" data-action="adicionar-medicamento">➕ Adicionar à Receita</button>
+                    <button type="button" class="custom-med-btn" id="btn-salvar-novo-med" title="Salvar este medicamento na sua lista pessoal rápida">💾 Salvar na Lista Pessoal</button>
+                    <button type="button" class="secondary" id="btn-limpar-campos-med" title="Limpar campos da prescrição">🧹 Limpar Campos</button>
+                </div>
+            </div>
+
+            <!-- Lista da Receita Atual -->
+            <div class="card">
+                <h2>Itens da Receita Atual</h2>
+                <ul class="med-list" id="lista-receita">
+                    <!-- Itens inseridos via JS -->
+                </ul>
+                <p id="empty-msg" class="empty-msg">Nenhum medicamento adicionado ainda.</p>
+
+                <div class="action-bar">
+                    <div class="action-model">
+                        <input type="text" id="nome-modelo" placeholder="Nome do novo modelo">
+                        <button data-action="salvar-modelo">💾 Salvar como Modelo</button>
+                    </div>
+                    <button class="print-btn" data-action="imprimir">🖨️ Imprimir / PDF (2 Vias)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÁREA EXCLUSIVA DE IMPRESSÃO (ESCONDIDA NA TELA) -->
+    <div class="print-area" id="print-area">
+        <!-- O conteúdo das vias será injetado pelo JavaScript -->
+    </div>
+
+    <!-- SCRIPTS DE FUNCIONAMENTO -->
+    <script src="../assets/js/vendor/html2canvas.min.js"></script>
+    <script src="../assets/js/vendor/jspdf.umd.min.js"></script>
+    <script src="../assets/js/exportar-pdf.js"></script>
+    <script src="../assets/js/receita.js" defer></script>
+</body>
+</html>

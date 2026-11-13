@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApoioAPS — ESF CDI 2</title>
+    
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#087e8b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body>
+    
+    <header class="app-bar">
+        <h1>ApoioAPS</h1>
+        <p>ESF CDI 2 — Secretaria Municipal de Saúde de Sete Lagoas</p>
+        <div class="header-actions">
+            <span id="statusRedeBadge" class="offline-pill online" title="Status de cache offline">
+                <span class="material-icons">cloud_done</span> 100% Offline Pronto
+            </span>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- Barra de Busca Rápida -->
+        <div class="search-container">
+            <div class="quick-search">
+                <span class="material-icons" aria-hidden="true">search</span>
+                <input type="text" id="filtroCards" placeholder="Pesquisar ferramenta, documento ou sistema (ex: receita, encaminhamento, vínculo, atestado, vacina, cadsus)..." autocomplete="off">
+            </div>
+        </div>
+
+        <!-- 1. DOCUMENTOS CLÍNICOS & ADMINISTRATIVOS -->
+        <div class="section-title-cat" data-category="docs">
+            <span class="material-icons">description</span>
+            Emissão de Documentos Clínicos & Administrativos
+        </div>
+        <div class="cards-grid" data-category-grid="docs">
+            <a href="Arquivos/receita.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">receipt</span></div>
+                <div class="text-info">
+                    <span class="badge-tag">2 Vias</span>
+                    <strong>Receituário Médico</strong>
+                    <span>Comum e Controle Especial com REMUME</span>
+                </div>
+            </a>
+
+            <a href="Arquivos/encaminhamento.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">send</span></div>
+                <div class="text-info">
+                    <span class="badge-tag">2 Vias</span>
+                    <strong>Encaminhamento & Exames</strong>
+                    <span>Pedidos clínicos, exames e cópia rápida</span>
+                </div>
+            </a>
+
+            <a href="Arquivos/gerador_atestados.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">pan_tool</span></div>
+                <div class="text-info">
+                    <span class="badge-tag">Legal</span>
+                    <strong>Atestados & Declarações</strong>
+                    <span>Afastamento, comparecimento e acompanhante</span>
+                </div>
+            </a>
+
+            <a href="Arquivos/declaracao_vinculo.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">verified_user</span></div>
+                <div class="text-info">
+                    <span class="badge-tag novo">Territorial / APS</span>
+                    <strong>Declaração de Vínculo & Atendimento</strong>
+                    <span>Comprovação de território, microárea, ACS, creche/escola e SUS</span>
+                </div>
+            </a>
+
+            <a href="Arquivos/relatorios_funcionarios.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">assignment</span></div>
+                <div class="text-info">
+                    <span class="badge-tag">Multiprofissional</span>
+                    <strong>Relatório Profissional</strong>
+                    <span>Pareceres, evoluções e laudos em A4</span>
+                </div>
+            </a>
+
+
+            <a href="Arquivos/prontuario.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">folder_shared</span></div>
+                <div class="text-info">
+                    <span class="badge-tag">PDF</span>
+                    <strong>Capa de Prontuário</strong>
+                    <span>Visualizar e imprimir capa física</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- 2. FERRAMENTAS CLÍNICAS & APOIO -->
+        <div class="section-title-cat" data-category="ferramentas">
+            <span class="material-icons">medical_services</span>
+            Apoio Clínico & Comunicação
+        </div>
+        <div class="cards-grid" data-category-grid="ferramentas">
+            <a href="Arquivos/calculadoras.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">calculate</span></div>
+                <div class="text-info">
+                    <span class="badge-tag novo">Novo</span>
+                    <strong>Calculadoras Clínicas</strong>
+                    <span>Idade gestacional (DPP) e IMC (adulto e idoso)</span>
+                </div>
+            </a>
+
+            <a href="Arquivos/calendario_vacinal.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">child_care</span></div>
+                <div class="text-info">
+                    <span class="badge-tag novo">Novo</span>
+                    <strong>Calendário Vacinal & Puericultura</strong>
+                    <span>PNI oficial e datas de puericultura com impressão</span>
+                </div>
+            </a>
+
+            <a href="Arquivos/whatsapp-marcacao.html" class="card-item">
+                <div class="icon-wrapper"><span class="material-icons">event_busy</span></div>
+                <div class="text-info">
+                    <span class="badge-tag">WhatsApp</span>
+                    <strong>Lembrete de Consulta</strong>
+                    <span>Envio direto, cópia de texto e cartão PNG</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- 3. SISTEMAS OFICIAIS -->
+        <div class="section-title-cat" data-category="sistemas">
+            <span class="material-icons">account_balance</span>
+            Sistemas Oficiais de Saúde
+        </div>
+        <div class="cards-grid" data-category-grid="sistemas">
+            <a href="https://saude-gmus.setelagoas.mg.gov.br/home" target="_blank" rel="noopener" class="card-item" data-external="true">
+                <div class="icon-wrapper"><span class="material-icons">local_hospital</span></div>
+                <div class="text-info">
+                    <span class="badge-tag externo">Externo</span>
+                    <strong>Sistema G-MUS</strong>
+                    <span>Gestão Municipal de Saúde de Sete Lagoas</span>
+                </div>
+            </a>
+
+
+            <a href="https://cadastro.saude.gov.br/novocartao/restrito/usuarioConsulta.jsp" target="_blank" rel="noopener" class="card-item" data-external="true">
+                <div class="icon-wrapper"><span class="material-icons">badge</span></div>
+                <div class="text-info">
+                    <span class="badge-tag externo">Externo</span>
+                    <strong>Cartão SUS (CADSUS)</strong>
+                    <span>Consulta e cadastro de usuários</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- 4. PLANILHAS & ARQUIVOS EM NUVEM -->
+        <div class="section-title-cat" data-category="arquivos">
+            <span class="material-icons">cloud_circle</span>
+            Planilhas & Impressos (Google Drive)
+        </div>
+        <div class="cards-grid" data-category-grid="arquivos">
+            <a href="https://docs.google.com/spreadsheets/d/1627GTQGCTu96TJhS93V2tLjXKqd3T-xOIrxEXeFOsmQ/edit?gid=80329976#gid=80329976" target="_blank" rel="noopener" class="card-item" data-external="true">
+                <div class="icon-wrapper"><span class="material-icons">medication</span></div>
+                <div class="text-info">
+                    <span class="badge-tag externo">Sheets</span>
+                    <strong>Status Medicamentos</strong>
+                    <span>Estoque e disponibilidade na rede</span>
+                </div>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1NS8P3g774y_CAAti-vIdLlaxzapa-eVDKqXVWMTHuME/edit?usp=sharing" target="_blank" rel="noopener" class="card-item" data-external="true">
+                <div class="icon-wrapper"><span class="material-icons">contact_phone</span></div>
+                <div class="text-info">
+                    <span class="badge-tag externo">Sheets</span>
+                    <strong>Telefones Úteis</strong>
+                    <span>Ramais da SMS e órgãos municipais</span>
+                </div>
+            </a>
+
+            <a href="https://docs.google.com/spreadsheets/d/1UBiALXCMhoxTtzD1DYX5c7ahg0uitquZPUmWjxNzQs4/edit?gid=0#gid=0" target="_blank" rel="noopener" class="card-item" data-external="true">
+                <div class="icon-wrapper"><span class="material-icons">list_alt</span></div>
+                <div class="text-info">
+                    <span class="badge-tag externo">Sheets</span>
+                    <strong>Requisitos de Exames</strong>
+                    <span>Instruções de preparo e solicitações</span>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/13hhVECNgQnF3P6jBNNRQsLaYz6vKpGHY?usp=sharing" target="_blank" rel="noopener" class="card-item" data-external="true">
+                <div class="icon-wrapper"><span class="material-icons">folder</span></div>
+                <div class="text-info">
+                    <span class="badge-tag externo">Drive</span>
+                    <strong>Pasta Atenas</strong>
+                    <span>Arquivos de apoio e documentos</span>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/drive/folders/1-A2qrW7AIFkBQQsI0XKB9FkKOB4Rw8Y4?usp=sharing" target="_blank" rel="noopener" class="card-item" data-external="true">
+                <div class="icon-wrapper"><span class="material-icons">print</span></div>
+                <div class="text-info">
+                    <span class="badge-tag externo">Drive</span>
+                    <strong>Pasta de Impressos</strong>
+                    <span>Formulários padrão para impressão</span>
+                </div>
+            </a>
+        </div>
+
+        <div id="noResults" class="no-results">
+            Nenhuma ferramenta ou documento encontrado para a busca digitada.
+        </div>
+        
+    </main>
+
+    <footer class="app-footer">
+        <p><strong>ESF CDI 2</strong> — Estratégia Saúde da Família | Sete Lagoas - MG</p>
+        <p>Ambiente de Produtividade Clínica & Administrativa da Atenção Primária à Saúde</p>
+    </footer>
+
+    <script>
+        const inputFiltro = document.getElementById('filtroCards');
+        const noResults = document.getElementById('noResults');
+        const cards = document.querySelectorAll('.card-item');
+        const categories = document.querySelectorAll('.section-title-cat');
+
+        function normalizarTexto(txt) {
+            return (txt || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+        }
+
+        inputFiltro.addEventListener('input', function() {
+            const termo = normalizarTexto(this.value);
+            let totalVisiveis = 0;
+
+            cards.forEach(card => {
+                const texto = normalizarTexto(card.textContent);
+                const corresponde = texto.includes(termo);
+                card.style.display = corresponde ? 'flex' : 'none';
+                if (corresponde) totalVisiveis++;
+            });
+
+            categories.forEach(cat => {
+                const catId = cat.dataset.category;
+                const grid = document.querySelector(`[data-category-grid="${catId}"]`);
+                if (grid) {
+                    const visiveisNoGrupo = [...grid.querySelectorAll('.card-item')].some(c => c.style.display !== 'none');
+                    cat.style.display = visiveisNoGrupo ? 'flex' : 'none';
+                    grid.style.display = visiveisNoGrupo ? 'grid' : 'none';
+                }
+            });
+
+            noResults.style.display = totalVisiveis === 0 ? 'block' : 'none';
+        });
+    </script>
+    <script src="assets/js/sw-register.js"></script>
+</body>
+</html>

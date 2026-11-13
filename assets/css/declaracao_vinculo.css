@@ -1,0 +1,570 @@
+/* ==========================================================================
+   DECLARAÇÃO DE VÍNCULO E ATENDIMENTO - ESF CDI 2
+   Folha de Estilos de Interface e Impressão Timbrada A4
+   ========================================================================== */
+
+body {
+    padding-bottom: 40px;
+}
+
+.vinculo-screen {
+    width: min(1000px, 100%);
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.vinculo-form-card {
+    padding: clamp(20px, 4vw, 36px);
+    border-top: 5px solid var(--brand);
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+    margin: 0 0 4px;
+    color: var(--brand);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: var(--brand-dark);
+    font-size: clamp(1.2rem, 3vw, 1.55rem);
+}
+
+.section-mark {
+    padding: 6px 12px;
+    color: var(--brand-dark);
+    background: var(--brand-soft);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Fieldsets e grupos */
+.form-fieldset {
+    border: 1px solid #dce4e8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    background: #fafcfc;
+}
+
+.form-fieldset legend {
+    font-weight: 700;
+    color: var(--brand-dark);
+    font-size: 0.95rem;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vinculo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.vinculo-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.form-group {
+    min-width: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: #334155;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.vinculo-grid input,
+.vinculo-grid select,
+.vinculo-grid textarea,
+.vinculo-grid-3 input,
+.vinculo-grid-3 select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #bdcbd0;
+    border-radius: 7px;
+    background: #fff;
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vinculo-grid input:focus,
+.vinculo-grid select:focus,
+.vinculo-grid textarea:focus,
+.vinculo-grid-3 input:focus,
+.vinculo-grid-3 select:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(8, 126, 139, 0.15);
+}
+
+.vinculo-grid textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+/* Checkboxes estilizados */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+    margin-top: 6px;
+}
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.check-item:hover {
+    background: var(--brand-soft);
+    border-color: #cbd5e1;
+}
+
+.check-item input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: var(--brand);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Lista de Dependentes */
+.dependentes-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dependente-row {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1.2fr 1fr auto;
+    gap: 10px;
+    align-items: flex-end;
+    background: #fff;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+}
+
+.dependente-row .btn-remover-dep {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 0 10px;
+    height: 38px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dependente-row .btn-remover-dep:hover {
+    background: #fca5a5;
+}
+
+.btn-add-dep {
+    margin-top: 10px;
+    background: #f1f5f9;
+    color: var(--brand-dark);
+    border: 1.5px dashed var(--brand);
+    border-radius: 7px;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-add-dep:hover {
+    background: var(--brand-soft);
+}
+
+/* Botões de Ação */
+.vinculo-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.vinculo-actions button {
+    flex: 1;
+    padding: 13px 18px;
+    border: 0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.96rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.primary-action {
+    background: var(--brand);
+    color: #fff;
+}
+
+.primary-action:hover {
+    background: var(--brand-dark);
+}
+
+.secondary-action {
+    background: #64748b;
+    color: #fff;
+    flex: 0 0 160px !important;
+}
+
+.secondary-action:hover {
+    background: #475569;
+}
+
+.demo-action {
+    background: #e2e8f0;
+    color: #334155;
+    flex: 0 0 170px !important;
+}
+
+.demo-action:hover {
+    background: #cbd5e1;
+}
+
+/* ==========================================================================
+   ESTILOS DE IMPRESSÃO (FOLHA TIMBRADA A4 OFICIAL SUS / PREFEITURA)
+   ========================================================================== */
+.vinculo-print {
+    display: none;
+}
+
+@page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+}
+
+@media (max-width: 768px) {
+    .vinculo-grid,
+    .vinculo-grid-3,
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group.full-width {
+        grid-column: auto;
+    }
+    .dependente-row {
+        grid-template-columns: 1fr;
+    }
+    .vinculo-actions {
+        flex-direction: column;
+    }
+    .secondary-action, .demo-action {
+        flex: 1 1 auto !important;
+    }
+}
+
+@media print {
+    html, body {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff;
+        color: #0f172a;
+        font-family: "Times New Roman", Times, Georgia, serif;
+    }
+
+    .app-header,
+    .vinculo-screen {
+        display: none !important;
+    }
+
+    .vinculo-print {
+        display: block !important;
+        width: 210mm;
+        min-height: 297mm;
+        padding: 14mm 18mm 16mm 18mm;
+        box-sizing: border-box;
+    }
+
+    .print-sheet {
+        min-height: 265mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Cabeçalho Institucional Oficial */
+    .gov-header {
+        display: flex;
+        align-items: center;
+        gap: 6mm;
+        padding-bottom: 4mm;
+        border-bottom: 2px solid #087e8b;
+    }
+
+    .gov-logo {
+        width: 60mm;
+        height: auto;
+    }
+
+    .gov-titles {
+        flex: 1;
+        text-align: right;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .gov-titles .inst-gov {
+        font-size: 8.5pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #334155;
+        line-height: 1.25;
+    }
+
+    .gov-titles .inst-unit {
+        font-size: 11pt;
+        font-weight: 900;
+        color: #06636d;
+        margin-top: 1mm;
+        text-transform: uppercase;
+    }
+
+    .gov-titles .inst-sub {
+        font-size: 8pt;
+        color: #64748b;
+    }
+
+    /* Título do Documento */
+    .doc-main-title {
+        text-align: center;
+        margin: 9mm 0 7mm;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .doc-main-title h1 {
+        margin: 0;
+        font-size: 15pt;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #0f172a;
+    }
+
+    .doc-main-title .doc-subtitle {
+        margin: 2mm 0 0;
+        font-size: 9pt;
+        font-style: italic;
+        color: #475569;
+    }
+
+    /* Corpo Probatório da Declaração */
+    .doc-content {
+        font-size: 11pt;
+        line-height: 1.7;
+        text-align: justify;
+        text-justify: inter-word;
+    }
+
+    .doc-content p {
+        margin: 0 0 4.5mm;
+        text-indent: 12mm;
+    }
+
+    .doc-content p.no-indent {
+        text-indent: 0;
+    }
+
+    .doc-content strong {
+        font-weight: 700;
+        color: #000;
+    }
+
+    /* Tabela de Dependentes / Família */
+    .dep-table-container {
+        margin: 4mm 0 6mm;
+    }
+
+    .dep-table-container h4 {
+        margin: 0 0 2mm;
+        font-size: 10pt;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        color: #06636d;
+        border-bottom: 1px solid #cbd5e1;
+        padding-bottom: 1mm;
+    }
+
+    .dep-print-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 9.5pt;
+    }
+
+    .dep-print-table th,
+    .dep-print-table td {
+        border: 1px solid #94a3b8;
+        padding: 2mm 3mm;
+        text-align: left;
+    }
+
+    .dep-print-table th {
+        background-color: #f1f5f9;
+        font-weight: 700;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.5pt;
+        text-transform: uppercase;
+    }
+
+    /* Lista de Itens Atestados */
+    .check-list-print {
+        margin: 3mm 0 5mm 6mm;
+        padding: 0;
+        list-style: none;
+    }
+
+    .check-list-print li {
+        position: relative;
+        padding-left: 5mm;
+        margin-bottom: 1.5mm;
+        font-size: 10.5pt;
+    }
+
+    .check-list-print li::before {
+        content: "■";
+        position: absolute;
+        left: 0;
+        font-size: 7pt;
+        top: 0.5mm;
+        color: #087e8b;
+    }
+
+    /* Observações */
+    .obs-print-box {
+        margin: 3mm 0 5mm;
+        padding: 2.5mm 3.5mm;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        border-radius: 1mm;
+        font-size: 9.5pt;
+        line-height: 1.45;
+    }
+
+    .obs-print-box strong {
+        display: block;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8.5pt;
+        text-transform: uppercase;
+        color: #334155;
+        margin-bottom: 1mm;
+    }
+
+    /* Rodapé com Localidade, Assinatura e Carimbo */
+    .doc-closing {
+        margin-top: 6mm;
+        text-align: right;
+        font-size: 11pt;
+    }
+
+    .doc-signatures-wrap {
+        margin-top: 14mm;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 12mm;
+    }
+
+    .stamp-area {
+        width: 65mm;
+        height: 26mm;
+        border: 1px dashed #94a3b8;
+        border-radius: 2mm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        padding: 2mm;
+        box-sizing: border-box;
+    }
+
+    .sig-area {
+        width: 85mm;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .sig-line {
+        border-top: 1.2px solid #000;
+        padding-top: 1.5mm;
+    }
+
+    .sig-name {
+        font-size: 10pt;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .sig-role {
+        font-size: 8.5pt;
+        color: #334155;
+    }
+
+    .sig-reg {
+        font-size: 8pt;
+        color: #64748b;
+    }
+
+    /* Rodapé institucional com CNES e endereço */
+    .inst-footer-line {
+        margin-top: auto;
+        padding-top: 3mm;
+        border-top: 1px solid #cbd5e1;
+        display: flex;
+        justify-content: space-between;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 7.5pt;
+        color: #64748b;
+    }
+}

@@ -1,0 +1,83 @@
+body { font-family: "Segoe UI", system-ui, sans-serif; background: #f3f8f9; color: #263746; }
+.app-container { width: min(1200px, 100%); margin: 0 auto; padding: 20px; display: grid; grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr); gap: 20px; }
+.left-col, .right-col { min-width: 0; }
+.card { padding: 20px; margin-bottom: 18px; }
+.card h2 { margin: 0 0 15px; padding-bottom: 8px; color: var(--brand-dark); border-bottom: 2px solid var(--brand-soft); font-size: 1.1rem; }
+.form-group { margin-bottom: 15px; }
+label { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; display: block; color: #334155; }
+input:not([type="checkbox"]), select { width: 100%; padding: 11px; border: 1px solid var(--border); border-radius: 7px; background: #fff; font-size: 0.95rem; }
+input:focus, select:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(8,126,139,.12); }
+.row { display: flex; gap: 12px; }
+.row > div { flex: 1; min-width: 0; }
+button { padding: 10px 15px; color: #fff; background: var(--brand); border: 0; border-radius: 7px; font-weight: 650; cursor: pointer; }
+button:hover { filter: brightness(0.94); }
+button.danger { background: var(--danger); }
+button.secondary { background: #64748b; }
+.save-config { width: 100%; margin-top: 10px; }
+.model-card { background: #e9f5f6; }
+.model-row { align-items: center; }
+.autocomplete-wrapper { position: relative; }
+.autocomplete-list { position: absolute; top: 100%; left: 0; right: 0; z-index: 5; display: none; max-height: 220px; overflow-y: auto; margin: 0; padding: 0; list-style: none; background: #fff; border: 1px solid var(--border); border-radius: 0 0 7px 7px; box-shadow: var(--shadow); }
+.autocomplete-list li { padding: 10px; border-bottom: 1px solid var(--border); cursor: pointer; }
+.autocomplete-list li:hover { background: var(--brand-soft); }
+.autocomplete-list li strong { display: block; color: var(--brand-dark); }
+.autocomplete-list li small { color: var(--muted); font-size: .82rem; }
+.field-hint { display: block; font-size: 0.8rem; color: #64748b; margin-top: 4px; line-height: 1.35; }
+.field-hint strong { color: #087e8b; font-weight: 600; }
+.custom-med-btn { font-size: 0.82rem; padding: 9px 12px; background: #f1f5f9; color: var(--brand-dark); border: 1px solid var(--border); border-radius: 7px; font-weight: 600; }
+.custom-med-btn:hover { background: var(--brand-soft); }
+
+.med-list { margin: 20px 0 0; padding: 0; list-style: none; }
+.med-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 12px; margin-bottom: 10px; background: #eef7f8; border-left: 4px solid var(--brand); border-radius: 5px; }
+.med-item-info { min-width: 0; overflow-wrap: anywhere; }
+.med-item-info strong { display: block; font-size: 1rem; color: #1e293b; margin-bottom: 3px; }
+.med-item-info .med-meta { font-size: 0.88rem; color: #087e8b; font-weight: 600; margin-bottom: 2px; }
+.med-item-info span { color: #475569; font-size: 0.88rem; line-height: 1.35; }
+.remove-med { min-width: 44px; padding: 7px 12px; }
+.empty-msg { color: var(--muted); font-size: .9rem; }
+.action-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.action-model { display: flex; flex: 1; flex-wrap: wrap; gap: 8px; align-items: center; }
+.action-model input { width: min(200px, 100%); }
+.print-btn { padding: 12px 20px; background: #087f5b; font-size: 1.05rem; }
+.print-area { display: none; }
+
+@media (max-width: 900px) { .app-container { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .app-container { padding: 12px; gap: 8px; } .row, .model-row, .action-bar { flex-direction: column; align-items: stretch; } .row > div { width: 100%; } .action-model { flex-direction: column; align-items: stretch; } .action-model input { width: 100%; } }
+
+@page { size: A4 landscape; margin: 0; }
+@media print {
+    html, body { width: 297mm; height: 210mm; margin: 0 !important; padding: 0 !important; overflow: hidden; background: #fff; color: #111; }
+    .app-header, .app-container { display: none !important; }
+    .print-area { display: grid !important; grid-template-columns: minmax(0, 1fr) 0 minmax(0, 1fr); column-gap: 3mm; width: 297mm; height: 210mm; padding: 5mm; box-sizing: border-box; }
+    .via { min-width: 0; min-height: 0; height: 200mm; padding: 3.5mm 4.5mm; display: flex; flex-direction: column; position: relative; box-sizing: border-box; overflow: visible; }
+    .via > * { max-width: 100%; box-sizing: border-box; }
+    .via-1 { grid-column: 1; }
+    .via-2 { grid-column: 3; }
+    .cut-line { grid-column: 2; grid-row: 1; width: 0; height: 100%; border-left: 1px dashed #94a3b8; }
+    .print-header { text-align: center; margin-bottom: 2.5mm; break-inside: avoid; }
+    .print-header .print-branding { border-bottom: 0; padding-bottom: 2mm; gap: 3.5mm; }
+    .print-branding img { width: 34mm; max-height: 18mm; object-fit: contain; }
+    .print-branding-unit { text-align: left; }
+    .print-branding-unit strong { font-size: 10.5pt; font-weight: bold; color: #000; line-height: 1.15; }
+    .print-branding-unit .unit-address { font-size: 7.5pt; color: #334155; margin-top: 0.5mm; line-height: 1.15; }
+    .print-branding-unit .doc-title-badge { font-size: 8pt; font-weight: bold; color: #086b76; text-transform: uppercase; margin-top: 0.5mm; }
+    .via-subtitle { font-size: 7.5pt; font-weight: bold; color: #475569; margin: 1mm 0 0; text-transform: uppercase; }
+    .print-patient { padding: 2mm 2.5mm; margin-bottom: 2.5mm; border: 1px solid #000; border-radius: 1mm; break-inside: avoid; }
+    .print-patient p { margin: 0.4mm 0; font-size: 8.5pt; line-height: 1.25; overflow-wrap: anywhere; }
+    .print-meds { flex: 1 1 auto; min-height: 0; }
+    .print-med-item { margin-bottom: 2.2mm; break-inside: avoid; page-break-inside: avoid; overflow-wrap: anywhere; }
+    .print-med-head { display: flex; justify-content: space-between; align-items: baseline; gap: 2mm; margin-bottom: 0.5mm; }
+    .print-med-head h3 { margin: 0; font-size: 9.5pt; font-weight: bold; color: #000; }
+    .print-med-qtd { font-size: 8.5pt; font-weight: 600; color: #1e293b; white-space: nowrap; }
+    .print-med-modo, .print-med-pos { margin: 0.2mm 0 0.2mm 2.5mm !important; font-size: 8.5pt !important; line-height: 1.25; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .print-empty { margin: 0; color: #666; text-align: center; }
+    .print-footer { flex: 0 0 auto; text-align: center; margin-top: 2.5mm; break-inside: avoid; }
+    .print-date { text-align: right; font-size: 8pt; margin-bottom: 5mm; }
+    .signature-line { width: 55mm; max-width: 90%; margin: 0 auto 1mm; border-top: 1px solid #000; }
+    .print-footer p { margin: .4mm 0; font-size: 8pt; overflow-wrap: anywhere; }
+
+    /* Seções exclusivas do Controle Especial */
+    .special-control-boxes { margin-top: 2mm; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; font-size: 7pt; border: 1px solid #333; padding: 1.8mm; border-radius: 1mm; text-align: left; }
+    .special-box h4 { margin: 0 0 1mm; font-size: 7.5pt; text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 0.5mm; }
+    .special-box p { margin: 0.8mm 0; }
+}

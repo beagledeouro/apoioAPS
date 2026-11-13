@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#087e8b"/>
+      <stop offset="100%" stop-color="#06636d"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#brandGrad)"/>
+  <!-- Medical Cross -->
+  <g fill="#ffffff" filter="url(#shadow)">
+    <rect x="216" y="96" width="80" height="320" rx="20"/>
+    <rect x="96" y="216" width="320" height="80" rx="20"/>
+  </g>
+  <!-- Active Pulse / Heartbeat indicator -->
+  <circle cx="390" cy="390" r="64" fill="#06636d" opacity="0.4"/>
+  <circle cx="390" cy="390" r="48" fill="#10b981"/>
+  <circle cx="390" cy="390" r="26" fill="#ffffff"/>
+</svg>

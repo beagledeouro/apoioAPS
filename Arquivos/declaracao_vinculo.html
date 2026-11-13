@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaração de Vínculo e Atendimento - ESF CDI 2</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/declaracao_vinculo.css">
+    
+    <!-- Scripts de Geração e Exportação de PDF -->
+    <script src="../assets/js/vendor/html2canvas.min.js"></script>
+    <script src="../assets/js/vendor/jspdf.umd.min.js"></script>
+    <script src="../assets/js/exportar-pdf.js"></script>
+    <script src="../assets/js/declaracao_vinculo.js" defer></script>
+</head>
+<body>
+    
+    <header class="app-header">
+        <div class="app-header-inner">
+            <div>
+                <h1>ESF CDI 2 — Declaração de Vínculo & Atendimento</h1>
+                <p>Comprovação de Domicílio Sanitário, Adscrição Territorial e Acompanhamento na Atenção Primária</p>
+            </div>
+            <a class="home-link" href="../index.html">← Início</a>
+        </div>
+    </header>
+
+    <main class="vinculo-screen">
+        <section class="form-card vinculo-form-card">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Atenção Primária à Saúde • ESF CDI 2</p>
+                    <h2>Emissor de Declaração de Vínculo e Atendimento</h2>
+                </div>
+                <span class="section-mark">CNES: 7633432</span>
+            </div>
+
+            <form id="vinculoForm">
+                
+                <!-- 1. IDENTIFICAÇÃO DO USUÁRIO / TITULAR -->
+                <fieldset class="form-fieldset">
+                    <legend>👤 Identificação do(a) Cidadão(ã) / Usuário(a)</legend>
+                    <div class="vinculo-grid">
+                        <div class="form-group full-width">
+                            <label for="nome">Nome Completo do(a) Paciente / Usuário(a):</label>
+                            <input type="text" id="nome" placeholder="Digite o nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cns">Cartão Nacional de Saúde (CNS / SUS):</label>
+                            <input type="text" id="cns" placeholder="000 0000 0000 0000" maxlength="18">
+                        </div>
+                        <div class="form-group">
+                            <label for="nascimento">Data de Nascimento:</label>
+                            <input type="date" id="nascimento" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nomeMae">Nome da Mãe:</label>
+                            <input type="text" id="nomeMae" placeholder="Nome completo da mãe (opcional)">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- 2. TERRITORIALIZAÇÃO E ENDEREÇO NA ESF CDI 2 -->
+                <fieldset class="form-fieldset">
+                    <legend>📍 Territorialização e Domicílio Sanitário</legend>
+                    <div class="vinculo-grid">
+                        <div class="form-group full-width">
+                            <label for="endereco">Logradouro e Número:</label>
+                            <input type="text" id="endereco" placeholder="Ex: Rua Nativo de Senna, nº 33" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="complemento">Complemento / Ponto de Referência:</label>
+                            <input type="text" id="complemento" placeholder="Ex: Apto 102, Casa 2, Próximo à praça">
+                        </div>
+                        <div class="form-group">
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" id="bairro" value="CDI 2" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="cep" value="35702-532" maxlength="9">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone / WhatsApp de Contato:</label>
+                            <input type="text" id="telefone" placeholder="(31) 90000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="microarea">Microárea da Unidade:</label>
+                            <select id="microarea">
+                                <option value="Microárea 01">Microárea 01</option>
+                                <option value="Microárea 02" selected>Microárea 02</option>
+                                <option value="Microárea 03">Microárea 03</option>
+                                <option value="Microárea 04">Microárea 04</option>
+                                <option value="Microárea 05">Microárea 05</option>
+                                <option value="Microárea 06">Microárea 06</option>
+                                <option value="Microárea 07">Microárea 07</option>
+                                <option value="Microárea 08">Microárea 08</option>
+                                <option value="Área de Cobertura Geral">Área de Cobertura Geral</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="acs">Agente Comunitário de Saúde (ACS) Responsável:</label>
+                            <input type="text" id="acs" placeholder="Ex: Maria ACS / Equipe ESF">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- 3. DEPENDENTES / FILHOS ACOMPANHADOS (OPCIONAL) -->
+                <fieldset class="form-fieldset">
+                    <legend>👨‍👩‍👧‍👦 Núcleo Familiar / Dependentes Vinculados (Opcional)</legend>
+                    <p style="margin: 0 0 10px; font-size: 0.85rem; color: #64748b;">
+                        Utilize caso a declaração inclua crianças ou outros familiares (ex: para matrícula escolar, creche ou benefícios sociais).
+                    </p>
+                    <div id="dependentesList" class="dependentes-container"></div>
+                    <button type="button" id="btnAddDep" class="btn-add-dep">
+                        <span>➕ Adicionar Dependente / Filho(a)</span>
+                    </button>
+                </fieldset>
+
+                <!-- 4. FINALIDADE & SITUAÇÃO DO ACOMPANHAMENTO -->
+                <fieldset class="form-fieldset">
+                    <legend>📋 Finalidade e Itens de Acompanhamento</legend>
+                    <div class="vinculo-grid">
+                        <div class="form-group full-width">
+                            <label for="finalidade">Finalidade Principal da Declaração:</label>
+                            <select id="finalidade">
+                                <option value="escola">Matrícula Escolar / Creche (Comprovação de Domicílio e Vacinação)</option>
+                                <option value="bolsa_familia">Comprovação de Condicionalidades do Bolsa Família / CadÚnico</option>
+                                <option value="residencia">Comprovação Geral de Domicílio Sanitário no Território</option>
+                                <option value="prenatal">Acompanhamento Pré-Natal em Curso</option>
+                                <option value="hiperdia">Acompanhamento no Programa Hiperdia (HAS / DM)</option>
+                                <option value="geral">Fins Administrativos e Sanitários Gerais</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label style="margin-top: 12px; margin-bottom: 6px; font-weight: 700; color: #334155;">
+                        Situação Operacional e Itens Atestados:
+                    </label>
+                    <div class="checkbox-grid">
+                        <label class="check-item">
+                            <input type="checkbox" id="chkCadastro" checked>
+                            <span>Cadastro individual e domiciliar ativo na ESF CDI 2</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chkAcomp" checked>
+                            <span>Acompanhamento clínico regular pela equipe multiprofissional</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chkVacina" checked>
+                            <span>Situação vacinal em conformidade com o calendário PNI</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chkPuericultura" checked>
+                            <span>Acompanhamento de crescimento e puericultura ativo</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chkPrenatal">
+                            <span>Acompanhamento pré-natal regular na unidade</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chkHiperdia">
+                            <span>Acompanhamento de condições crônicas (Hiperdia)</span>
+                        </label>
+                    </div>
+
+                    <div class="vinculo-grid" style="margin-top: 14px;">
+                        <div class="form-group full-width">
+                            <label for="observacoes">Observações / Informações Complementares (Opcional):</label>
+                            <textarea id="observacoes" placeholder="Ex: Usuário em acompanhamento longitudinal. Carteira de vacinação conferida nesta data."></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- 5. PROFISSIONAL EMISSOR E DATA -->
+                <fieldset class="form-fieldset">
+                    <legend>✍️ Dados do Emissor e Data de Emissão</legend>
+                    <div class="vinculo-grid-3">
+                        <div class="form-group">
+                            <label for="emissorNome">Nome do Profissional:</label>
+                            <input type="text" id="emissorNome" placeholder="Seu nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emissorCargo">Cargo / Função:</label>
+                            <select id="emissorCargo">
+                                <option value="Enfermeiro(a) da Família">Enfermeiro(a) da Família</option>
+                                <option value="Médico(a) de Família e Comunidade">Médico(a) de Família e Comunidade</option>
+                                <option value="Gerente da Unidade de Saúde">Gerente da Unidade de Saúde</option>
+                                <option value="Técnico(a) de Enfermagem">Técnico(a) de Enfermagem</option>
+                                <option value="Agente Comunitário(a) de Saúde">Agente Comunitário(a) de Saúde</option>
+                                <option value="Cirurgião(ã)-Dentista">Cirurgião(ã)-Dentista</option>
+                                <option value="Assistente Administrativo(a)">Assistente Administrativo(a)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="emissorRegistro">Conselho de Classe / Matrícula:</label>
+                            <input type="text" id="emissorRegistro" placeholder="Ex: COREN-MG 000.000 / CRM-MG 00.000">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="dataEmissao">Data da Emissão:</label>
+                            <input type="date" id="dataEmissao" required style="max-width: 250px;">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- BOTÕES DE AÇÃO -->
+                <div class="vinculo-actions">
+                    <button type="submit" class="primary-action">
+                        🖨️ Gerar Declaração Oficial / Imprimir (A4)
+                    </button>
+                    <button type="button" id="btnDemo" class="demo-action">
+                        ⚡ Preencher Exemplo
+                    </button>
+                    <button type="button" id="btnLimpar" class="secondary-action">
+                        Limpar
+                    </button>
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <!-- ÁREA DE IMPRESSÃO A4 (OCULTA NA TELA, RENDERIZADA AO IMPRIMIR / GERAR PDF) -->
+    <div id="printArea" class="vinculo-print" aria-hidden="true"></div>
+
+</body>
+</html>
