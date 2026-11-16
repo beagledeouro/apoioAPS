@@ -98,5 +98,17 @@ async function gerarRelatorio(event) {
     await baixarPDFEAguardarImpressao(nomeArquivoSeguro(camposRelatorio.paciente.value, 'relatorio'), 'p');
 }
 
+function carregarParametrosURL() {
+    const params = new URLSearchParams(window.location.search);
+    const paciente = params.get('paciente') || params.get('nome');
+    if (paciente && camposRelatorio.paciente) {
+        camposRelatorio.paciente.value = paciente;
+    }
+    if (params.has('nascimento') && camposRelatorio.nascimento) {
+        camposRelatorio.nascimento.value = params.get('nascimento');
+    }
+}
+
+carregarParametrosURL();
 document.getElementById('reportForm').addEventListener('submit', gerarRelatorio);
 document.getElementById('limparRelatorio').addEventListener('click', () => document.getElementById('reportForm').reset());

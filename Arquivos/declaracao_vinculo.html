@@ -123,57 +123,17 @@
                     </button>
                 </fieldset>
 
-                <!-- 4. FINALIDADE & SITUAÇÃO DO ACOMPANHAMENTO -->
+                <!-- 4. ACOMPANHAMENTO NA UNIDADE (OPCIONAL) -->
                 <fieldset class="form-fieldset">
-                    <legend>📋 Finalidade e Itens de Acompanhamento</legend>
+                    <legend>🩺 Acompanhamento na Unidade (Opcional)</legend>
                     <div class="vinculo-grid">
-                        <div class="form-group full-width">
-                            <label for="finalidade">Finalidade Principal da Declaração:</label>
-                            <select id="finalidade">
-                                <option value="escola">Matrícula Escolar / Creche (Comprovação de Domicílio e Vacinação)</option>
-                                <option value="bolsa_familia">Comprovação de Condicionalidades do Bolsa Família / CadÚnico</option>
-                                <option value="residencia">Comprovação Geral de Domicílio Sanitário no Território</option>
-                                <option value="prenatal">Acompanhamento Pré-Natal em Curso</option>
-                                <option value="hiperdia">Acompanhamento no Programa Hiperdia (HAS / DM)</option>
-                                <option value="geral">Fins Administrativos e Sanitários Gerais</option>
-                            </select>
+                        <div class="form-group">
+                            <label for="dataInicioAcomp">Data de Início do Acompanhamento (Opcional):</label>
+                            <input type="date" id="dataInicioAcomp">
                         </div>
-                    </div>
-
-                    <label style="margin-top: 12px; margin-bottom: 6px; font-weight: 700; color: #334155;">
-                        Situação Operacional e Itens Atestados:
-                    </label>
-                    <div class="checkbox-grid">
-                        <label class="check-item">
-                            <input type="checkbox" id="chkCadastro" checked>
-                            <span>Cadastro individual e domiciliar ativo na ESF CDI 2</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chkAcomp" checked>
-                            <span>Acompanhamento clínico regular pela equipe multiprofissional</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chkVacina" checked>
-                            <span>Situação vacinal em conformidade com o calendário PNI</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chkPuericultura" checked>
-                            <span>Acompanhamento de crescimento e puericultura ativo</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chkPrenatal">
-                            <span>Acompanhamento pré-natal regular na unidade</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chkHiperdia">
-                            <span>Acompanhamento de condições crônicas (Hiperdia)</span>
-                        </label>
-                    </div>
-
-                    <div class="vinculo-grid" style="margin-top: 14px;">
                         <div class="form-group full-width">
                             <label for="observacoes">Observações / Informações Complementares (Opcional):</label>
-                            <textarea id="observacoes" placeholder="Ex: Usuário em acompanhamento longitudinal. Carteira de vacinação conferida nesta data."></textarea>
+                            <textarea id="observacoes" placeholder="Ex: Paciente em acompanhamento longitudinal nesta unidade."></textarea>
                         </div>
                     </div>
                 </fieldset>

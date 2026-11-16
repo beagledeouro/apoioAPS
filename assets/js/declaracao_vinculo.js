@@ -113,43 +113,6 @@ function coletarDependentes() {
     return dependentes;
 }
 
-// Configuração Rápida por Finalidade
-function aplicarModeloFinalidade() {
-    const finalidade = document.getElementById('finalidade').value;
-    const chkCadastro = document.getElementById('chkCadastro');
-    const chkAcomp = document.getElementById('chkAcomp');
-    const chkVacina = document.getElementById('chkVacina');
-    const chkPuericultura = document.getElementById('chkPuericultura');
-    const chkPrenatal = document.getElementById('chkPrenatal');
-    const chkHiperdia = document.getElementById('chkHiperdia');
-
-    // Estado base
-    chkCadastro.checked = true;
-    chkAcomp.checked = true;
-
-    if (finalidade === 'escola') {
-        chkVacina.checked = true;
-        chkPuericultura.checked = true;
-        chkPrenatal.checked = false;
-        chkHiperdia.checked = false;
-    } else if (finalidade === 'bolsa_familia') {
-        chkVacina.checked = true;
-        chkPuericultura.checked = true;
-        chkPrenatal.checked = false;
-        chkHiperdia.checked = false;
-    } else if (finalidade === 'prenatal') {
-        chkPrenatal.checked = true;
-        chkVacina.checked = true;
-        chkPuericultura.checked = false;
-        chkHiperdia.checked = false;
-    } else if (finalidade === 'hiperdia') {
-        chkHiperdia.checked = true;
-        chkVacina.checked = true;
-        chkPuericultura.checked = false;
-        chkPrenatal.checked = false;
-    }
-}
-
 // Persistência do Profissional Emissor
 function carregarEmissorSalvo() {
     try {
@@ -194,10 +157,8 @@ function preencherExemplo() {
     document.getElementById('microarea').value = 'Microárea 02';
     document.getElementById('acs').value = 'Cláudia Regina (ACS)';
 
-    document.getElementById('finalidade').value = 'escola';
-    aplicarModeloFinalidade();
-
-    document.getElementById('observacoes').value = 'Família com acompanhamento regular pela equipe. Carteira de vacinação da criança conferida e atualizada nesta unidade de saúde.';
+    document.getElementById('dataInicioAcomp').value = '2023-03-10';
+    document.getElementById('observacoes').value = 'Família com acompanhamento regular pela equipe nesta unidade de saúde.';
 
     // Adiciona exemplo de dependente
     document.getElementById('dependentesList').innerHTML = '';
@@ -215,7 +176,6 @@ function limparFormulario() {
     document.getElementById('dependentesList').innerHTML = '';
     definirDataHoje(document.getElementById('dataEmissao'));
     carregarEmissorSalvo();
-    aplicarModeloFinalidade();
 }
 
 // Montagem do Documento Impresso Oficial em A4
@@ -233,16 +193,8 @@ function gerarDocumentoImpressao() {
     const microarea = document.getElementById('microarea').value;
     const acs = document.getElementById('acs').value.trim() || 'Equipe de Saúde da Família';
 
-    const finalidadeTextoMap = {
-        escola: 'comprovação de domicílio e acompanhamento em saúde para fins de matrícula escolar / creche',
-        bolsa_familia: 'comprovação de vínculo sanitário e cumprimento de condicionalidades de saúde de programas sociais governamentais (Bolsa Família / CadÚnico)',
-        residencia: 'comprovação de residência e vínculo sanitário em território sob adscrição da Atenção Primária',
-        prenatal: 'comprovação de acompanhamento pré-natal regular na unidade básica de saúde',
-        hiperdia: 'comprovação de acompanhamento multiprofissional contínuo no programa Hiperdia',
-        geral: 'fins de comprovação administrativa e sanitária geral a pedido da parte interessada'
-    };
-    const finalidadeVal = document.getElementById('finalidade').value;
-    const finalidadeDescricao = finalidadeTextoMap[finalidadeVal] || 'fins de comprovação';
+    const dataInicioAcompVal = document.getElementById('dataInicioAcomp').value;
+    const trechoInicioAcomp = dataInicioAcompVal ? `, desde <strong>${formatarData(dataInicioAcompVal)}</strong>` : '';
 
     const dependentes = coletarDependentes();
     const observacoes = document.getElementById('observacoes').value.trim();
@@ -253,27 +205,6 @@ function gerarDocumentoImpressao() {
     const emissorRegistro = document.getElementById('emissorRegistro').value.trim();
     const dataEmissaoVal = document.getElementById('dataEmissao').value;
     const dataExtenso = dataPorExtenso(dataEmissaoVal);
-
-    // Condicionalidades assinaladas
-    const itensAtestados = [];
-    if (document.getElementById('chkCadastro').checked) {
-        itensAtestados.push('Cadastro individual e familiar ativo no sistema de informação e na base territorial da ESF CDI 2;');
-    }
-    if (document.getElementById('chkAcomp').checked) {
-        itensAtestados.push('Acompanhamento regular e longitudinal prestado pela equipe multiprofissional da Atenção Primária;');
-    }
-    if (document.getElementById('chkVacina').checked) {
-        itensAtestados.push('Situação vacinal avaliada e em conformidade com as diretrizes do Programa Nacional de Imunizações (PNI);');
-    }
-    if (document.getElementById('chkPuericultura').checked) {
-        itensAtestados.push('Acompanhamento de crescimento e desenvolvimento infantil (Puericultura) em curso regular;');
-    }
-    if (document.getElementById('chkPrenatal').checked) {
-        itensAtestados.push('Acompanhamento pré-natal ativo com consultas e exames de rotina em andamento nesta unidade;');
-    }
-    if (document.getElementById('chkHiperdia').checked) {
-        itensAtestados.push('Acompanhamento continuado no controle de condições crônicas (Hipertensão / Diabetes);');
-    }
 
     // Montagem do HTML de impressão
     const printContainer = document.getElementById('printArea');
@@ -313,13 +244,8 @@ function gerarDocumentoImpressao() {
                 </p>
 
                 <p>
-                    Atestamos que o(a) referido(a) usuário(a) mantém vínculo sanitário ativo nesta unidade de saúde, sendo atendido(a) 
-                    pela equipe de saúde da família para ${finalidadeDescricao}, constando em nossos registros a seguinte situação operacional:
+                    Atestamos ainda que o(a) referido(a) paciente possui cadastro ativo e é regularmente acompanhado(a) nesta unidade de saúde pela equipe da <strong>Estratégia Saúde da Família (ESF CDI 2)</strong>${trechoInicioAcomp}, recebendo assistência integral e longitudinal no âmbito da Atenção Primária à Saúde.
                 </p>
-
-                <ul class="check-list-print">
-                    ${itensAtestados.map(item => `<li>${item}</li>`).join('')}
-                </ul>
 
                 ${dependentes.length > 0 ? `
                     <div class="dep-table-container">
@@ -412,17 +338,13 @@ function carregarParametrosURL() {
     if (params.has('endereco')) document.getElementById('endereco').value = params.get('endereco');
     if (params.has('microarea')) document.getElementById('microarea').value = params.get('microarea');
     if (params.has('acs')) document.getElementById('acs').value = params.get('acs');
-    if (params.has('finalidade')) {
-        document.getElementById('finalidade').value = params.get('finalidade');
-        aplicarModeloFinalidade();
-    }
+    if (params.has('inicio')) document.getElementById('dataInicioAcomp').value = params.get('inicio');
 }
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
     definirDataHoje(document.getElementById('dataEmissao'));
     carregarEmissorSalvo();
-    aplicarModeloFinalidade();
 
     // Máscaras
     document.getElementById('cpf').addEventListener('input', (e) => {
@@ -436,7 +358,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Eventos
-    document.getElementById('finalidade').addEventListener('change', aplicarModeloFinalidade);
     document.getElementById('btnAddDep').addEventListener('click', () => criarLinhaDependente());
     document.getElementById('vinculoForm').addEventListener('submit', processarSubmissao);
     document.getElementById('btnLimpar').addEventListener('click', limparFormulario);

@@ -4,7 +4,7 @@
  * Garante disponibilidade 100% offline de todas as ferramentas locais do sistema.
  */
 
-const CACHE_NAME = 'apoioaps-cache-v1.0.1';
+const CACHE_NAME = 'apoioaps-cache-v1.0.2';
 
 // Lista completa de todos os recursos locais essenciais para funcionamento offline
 const PRECACHE_ASSETS = [
